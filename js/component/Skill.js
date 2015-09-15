@@ -236,9 +236,6 @@ AddSkillPanelContent = React.createClass({
 		
 		//Refresh parent view (Block Skills)
 		this.props.onRefresh(data);
-		
-		//Close panel
-		closeProduct();
 	},
 	
 	loadDataFromServer: function(){
@@ -282,6 +279,8 @@ AddSkillPanelContent = React.createClass({
 				success: function(data){
 					if (data.charAt(0) != '-') {
 						this.refreshView(JSON.parse(data));
+						//Close panel
+						closeProduct();
 					}
 				}.bind(this),
 				error: function(xhr, status, err){
