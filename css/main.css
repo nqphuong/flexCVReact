@@ -1,0 +1,556 @@
+/*******************************************
+FONTS
+*******************************************/
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800);
+/*******************************************
+SETTINGS
+*******************************************/
+@charset "utf-8";
+@-webkit-viewport   { width: device-width; }
+@-moz-viewport      { width: device-width; }
+@-ms-viewport       { width: device-width; }
+@-o-viewport        { width: device-width; }
+@viewport           { width: device-width; }
+/*******************************************
+BODY
+*******************************************/
+body{
+  font-family: 'Open Sans', Arial, Tahoma;
+  font-weight: 400;
+  font-size: 1em;
+  color: #363636;
+  background: #ededed;
+}
+/*******************************************
+CONTAINER
+*******************************************/
+.container{
+  margin-top: 80px;
+  margin-bottom: 15px;
+  background: #fff;
+}
+
+.text-center{
+  text-align: center;
+  margin-top: -75px;
+  padding-bottom: 10px;
+  border-bottom: double #ededed;
+}
+
+.avatar{
+  background: #ededed;
+  display: inline-block;
+  border-radius: 50%;
+  width: 160px;
+  height: 160px;
+  padding: 5px;
+}
+
+.avatar img{
+  border-radius: 50%;
+  /*border: 5px solid #ccc;*/
+  width: 150px;
+}
+
+.text-header{
+  
+}
+
+.text-header h1{
+  font-size: 2.4em;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: -1px;
+  margin-top: 10px;
+  line-height: 30px;
+}
+
+.text-header h1 strong{
+  font-size: 1.5em;
+}
+
+.text-header h1 span.name{
+  color: #F0563D;
+}
+
+.box{
+  position: relative;
+}
+
+.box .title{
+  position: relative;
+}
+
+.box .title .overlay,
+.job .overlay,
+.education .overlay,
+.contact-item .overlay{
+
+  position: absolute;
+  width: 100%;
+  /*height: 100%;*/
+  opacity: 0;
+}
+
+.box .title .overlay span,
+.job .overlay span,
+.education .overlay span,
+.contact-item .overlay span{
+  float: right;
+  color: #aaa;
+}
+
+.box .title:hover .overlay,
+.job:hover .overlay,
+.education li:hover .overlay,
+.contact-item:hover .overlay{
+  opacity: 1;
+  z-index: 20;
+  /*border-radius: 2px;*/
+}
+
+.box .title .overlay .fa-plus-square:hover,
+.box .title .overlay .fa-pencil:hover,
+.job .overlay .fa-eye-slash:hover,
+.job .overlay .fa-pencil:hover,
+.education .overlay .fa-eye-slash:hover,
+.education .overlay .fa-pencil:hover,
+.contact-item .overlay .fa-eye-slash:hover,
+.contact-item .overlay .fa-pencil:hover{
+  color: #F0563D !important;
+  cursor: pointer;
+}
+
+.box h2{
+  color: #F0563D;
+  text-transform: uppercase;
+  font-size: 1.8em;
+  font-weight: 700;
+}
+
+.box p{
+  font-size: 1.2em;
+  line-height: 1.5em;
+}
+
+.education{
+  list-style: none;
+  padding: 1em 0;
+  position: relative;
+}
+
+.education:before {
+  width: 5px;
+  height: 100%;
+  position: absolute;
+  left: 25px;
+  top: 0;
+  content: ' ';
+  display: block;
+  background: #ec7263;
+  background: -moz-linear-gradient(top,  #ffffff 0%, #ec7263 7%, #ec7263 89%, #ffffff 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(7%,#ec7263), color-stop(89%,#ec7263), color-stop(100%,#ffffff));
+  background: -webkit-linear-gradient(top,  #ffffff 0%,#ec7263 7%,#ec7263 89%,#ffffff 100%);
+  background: -o-linear-gradient(top,  #ffffff 0%,#ec7263 7%,#ec7263 89%,#ffffff 100%);
+  background: -ms-linear-gradient(top,  #ffffff 0%,#ec7263 7%,#ec7263 89%,#ffffff 100%);
+  background: linear-gradient(to bottom,  #ffffff 0%,#ec7263 7%,#ec7263 89%,#ffffff 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=0 );
+}
+
+.education .description:after {
+  content: '';
+  position: absolute;
+  top: 15px;
+  right: 0;
+  left: -16px;
+  height: 0;
+  width: 0;
+  border: solid transparent;
+  border-right-color: #eee;
+  border-width: 8px;
+  pointer-events: none;
+}
+
+.education li{
+  position: relative;
+  width: 100%;
+  float: left;
+  /*z-index: 2;*/
+}
+
+.education .year{
+  float: left;
+  font-size: 1.5em;
+  font-weight: 700;
+  padding: 10px;
+  width: 10%;
+  background: #fff;
+  display: inline-block;
+}
+
+.education .description{
+  width: 90%;
+  float: right !important;
+  background: #eee;
+  padding: 10px 10px 0 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  position: relative;
+  display: inline-block;
+}
+
+.education .description h3{
+  font-size: 1.6em;
+  font-weight: 700;
+  margin: 0;
+  padding: 0;
+}
+
+.education .description p{
+  font-size: 1.3em;
+  margin-top: 5px;
+}
+
+.job{
+  margin-bottom: 15px;
+}
+
+.job .company{
+  font-size: 1.4em;
+  font-weight: 700;
+}
+
+.job .year{
+  font-size: 1.3em;
+  
+}
+
+.job .title{
+  font-size: 1.6em;
+  font-weight: 700;
+}
+
+.job .description{
+  font-size: 1.2em;
+}
+
+.contact-item{
+  width: 100%;
+  float: left;
+}
+
+.contact-item .item-icon{
+  float: left;
+  padding: 10px;
+  font-size: 1.8em;
+  border-right: solid 1px #aaa;
+  border-bottom: solid 1px #aaa;
+  text-align: center;
+  opacity: 0.2;
+}
+
+.contact-item .item-text.only{
+  margin-top: 10px;
+}
+
+.contact-item .item-text{
+  font-size: 1.5em;
+  font-weight: 700;
+  opacity: 0.9;
+  float: right !important;
+  width: calc(100% - 55px);
+}
+
+.contact-item .item-description{
+  font-size: 1.2em;
+  opacity: 0.7;
+  float: right !important;
+  width: calc(100% - 55px);
+}
+
+.item-skills{
+  height: 30px;
+  background: #F0563D;
+  color: #fff;
+  padding: 5px 10px;
+  margin-bottom: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 1.3em;
+  font-weight: 600;
+  width: 100%;
+}
+
+.skills-legend{
+  margin-top: 20px;
+}
+
+.skills-legend .legend{
+  display: block;
+  width: 25%;
+  position: relative;
+  float: left;
+  /*margin-left: -3px;*/
+}
+
+.skills-legend .legend{
+  height: 20px;
+  border-left: solid 3px #ccc;
+  opacity: 0.7;
+  border-bottom: solid 3px #ccc;
+  text-align: center;
+  color: #a9a9a9;
+  font-size: 1.2em;
+}
+
+.skills-legend .legend.last{
+  border-right: solid 3px #ccc;
+}
+
+.language-skills{
+  
+}
+
+.language-skills .skill{
+  font-size: 1.3em;
+  margin: 10px 0;
+  border-bottom: solid 1px #eee;
+  padding-bottom: 10px;
+}
+
+.language-skills .skill .icon{
+  width: 111px;
+  height: 14px;
+  float: right;
+  background: url(../images/star-grey.png);
+}
+
+.language-skills .skill .icon .icon-red{
+  background: url(../images/star-red.png);
+}
+
+.hobby{
+  color: #fff;
+  display: inline-block;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  padding: 5px 5px 5px 25px;
+  background: #A75265;
+  position: relative;
+  font-size: 1.2em;
+}
+
+.hobby:before{
+  content: "\f004";
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  position: absolute;
+  top: 6px;
+  left: 7px;
+}
+
+.m-r-5px{
+  margin-right: 5px;
+}
+
+.w-60{
+  width: 60%;
+}
+
+.w-80{
+  width: 80%;
+}
+
+.w-100{
+  width: 100%;
+}
+
+#modifyPanel{
+  border: #141414 1px dashed !important;
+  border-radius: 5px;
+  background: #fff;
+  z-index: 99;
+  min-height: 120px;
+  position: absolute;
+  padding: 20px;
+  top: 10px;
+  left: 15px;
+  right: 15px;
+  display: none;
+  text-align: left;
+}
+
+#closeButton{
+  float: right;
+  background: url('../images/close.png') no-repeat;
+  display: inline-block;
+  width: 73px;
+  height: 73px;
+  margin-right: -10px;
+  margin-top: -10px;
+  background-position: -35px -33px;
+  border: none;
+}
+
+#closeButton:hover{
+  background-position: -35px -173px;
+  border: none;
+}
+
+#whiteOverlay{
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: url('../images/white_overlay.png') repeat;
+  z-index: 98;
+}
+
+#f-about-me{
+  
+}
+
+#f-about-me p,
+#f-add-education p,
+#f-add-experience p,
+#f-add-contact p,
+#f-add-skill p{
+  font-size: 1.5em;
+  font-weight: 700;
+}
+
+#f-about-me input,
+#f-add-education p input,
+#f-add-experience p input,
+#f-add-contact p input{
+  font-size: 1.2em;
+}
+
+#f-about-me textarea,
+#f-add-education textarea,
+#f-add-experience textarea,
+#f-add-contact textarea{
+  width:100%;
+  font-size: 1.2em;
+}
+
+.m-b-10px{
+  margin-bottom: 10px;
+}
+
+#f-add-skill{
+  
+}
+
+#f-add-skill ul,
+#f-add-language ul,
+#f-add-hobby ul{
+  list-style: none;
+  font-size: 1.4em;
+  font-weight: 700;
+}
+
+#f-add-skill ul li,
+#f-add-language ul li,
+#f-add-hobby ul li{
+  margin-bottom: 5px;
+}
+
+#f-add-skill ul li div,
+#f-add-language ul li div,
+#f-add-hobby ul li div{
+  float: left;
+  width: 100px;
+  margin-top: 3px;
+}
+
+#f-add-skill ul li span,
+#f-add-skill .title a span,
+#f-add-language ul li span,
+#f-add-language .title a span,
+#f-add-hobby ul li span,
+#f-add-hobby .title a span{
+  color: #363636;
+  font-size: 20px;
+  margin-left: 5px;
+}
+
+#f-add-skill ul li a:hover span.fa-remove,
+#f-add-language ul li a:hover span.fa-remove,
+#f-add-hobby ul li a:hover span.fa-remove{
+  color: #F0563D;
+}
+
+#f-add-skill .title a:hover span.fa-plus,
+#f-add-skill ul li a:hover span.fa-arrow-circle-up,
+#f-add-skill ul li a:hover span.fa-arrow-circle-down,
+#f-add-language .title a:hover span.fa-plus,
+#f-add-language ul li a:hover span.fa-arrow-circle-up,
+#f-add-language ul li a:hover span.fa-arrow-circle-down,
+#f-add-hobby .title a:hover span.fa-plus,
+#f-add-hobby ul li a:hover span.fa-arrow-circle-up,
+#f-add-hobby ul li a:hover span.fa-arrow-circle-down{
+  color: #337ab7;
+  cursor: pointer;
+}
+
+#f-add-skill input,
+#f-add-language input,
+#f-add-hobby input{
+  width: 40px;
+  font-weight: normal;
+  text-align: center;
+  color: #363636;
+}
+
+#f-add-skill .remark,
+#f-add-language .remark,
+#f-add-hobby .remark{
+  font-size: 1.1em;
+  font-weight: normal;
+}
+
+#f-add-skill .title,
+#f-add-language .title,
+#f-add-hobby .title{
+  font-size: 1.4em;
+  font-weight: 700;
+  margin-bottom: 10px;
+  margin-left: 38px;
+  display: inline-flex;
+}
+
+#f-add-skill .title .first,
+#f-add-language .title .first,
+#f-add-hobby .title .first{
+  float: left;
+  padding-right: 75px;
+}
+
+#f-add-skill .title .left,
+#f-add-language .title .left,
+#f-add-hobby .title .left{
+  width: 97px;
+}
+
+#f-add-skill .title .right,
+#f-add-language .title .right,
+#f-add-hobby .title .right{
+  width: 40px;
+  margin-left: 5px;
+}
+
+#f-add-skill .title a,
+#f-add-language .title a,
+#f-add-hobby .title a{
+  margin-top: 4px;
+}
+
+#f-add-skill .first,
+#f-add-language .first,
+#f-add-hobby .first{
+  clear: both;
+}
