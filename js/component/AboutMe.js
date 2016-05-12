@@ -13,16 +13,16 @@ var AboutMe = React.createClass({
 			}.bind(this)
 		});
 	},
-	
+
 	componentDidMount: function(){
 		this.loadDataFromServer();
-		
+
 		jQuery("#modif_aboutme").bind("click", function(e){
 			e.preventDefault();
-			
+
 			//Show popup panel
 			reactClickEvent("aboutme", "modif_aboutme");
-			
+
 			var action = getSiteUrl() + "controller/SiteController.php?action=updatecontent";
 			//Render component
 			React.render(
@@ -34,31 +34,29 @@ var AboutMe = React.createClass({
 			);
 		}.bind(this));
 	},
-	
+
 	refreshView: function(data){
 		this.setState({data:data});
 	},
-	
+
 	getInitialState: function(){
 		return {
 			data:[],
 		}
 	},
-	
+
     render: function(){
 		var content = this.state.data.map(function(detail){
 			return(
 				<p>{detail.content}</p>
 			);
 		});
-        
+
+		var overlay = allowModif() ? <Overlay /> : '';
+
 		return(
             <div className="title">
-				<div className="overlay">
-					<a id="modif_aboutme" href="template/aboutme.html">
-						<span className="fa fa-pencil fa-2x"></span>
-					</a>
-				</div>
+				{overlay}
 				<h2>// {this.props.title}</h2>
 				{content}
 			</div>
@@ -66,10 +64,22 @@ var AboutMe = React.createClass({
     }
 });
 
+var Overlay = React.createClass({
+	render: function(){
+		return (
+			<div className="overlay">
+				<a id="modif_aboutme">
+					<span className="fa fa-pencil fa-2x"></span>
+				</a>
+			</div>
+		);
+	}
+});
+
 /**Popup content
  */
 var ModifyPanelContent = React.createClass({
-	
+
 	loadDataFromServer: function(){
 		$.ajax({
 			url: this.props.url,
@@ -82,13 +92,14 @@ var ModifyPanelContent = React.createClass({
 			}.bind(this)
 		});
 	},
-	
+
 	componentDidMount: function(){
 		this.loadDataFromServer();
 	},
-	
+
 	componentDidUpdate: function(){
 		var url = this.props.action;
+		console.log(url);
 		jQuery("#f-about-me").submit(function(){
 			var content = $("#f-about-me textarea").val();
 			if (content == "") {
@@ -108,22 +119,22 @@ var ModifyPanelContent = React.createClass({
 					}.bind(this)
 				});
 			}
-			
+
 			return false;
 		}.bind(this));
 	},
-	
+
 	refreshParentView: function(data){
 		this.props.onRefresh(data);
 		closeProduct();
 	},
-	
+
 	getInitialState: function(){
 		return{
 			data:[],
 		}
 	},
-	
+
 	render: function(){
 		var content = this.state.data.map(function(detail){
 			return(

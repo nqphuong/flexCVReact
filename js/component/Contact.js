@@ -4,7 +4,7 @@ var ContactTitle = React.createClass({
             e.preventDefault();
             var action = getSiteUrl() + "controller/SiteController.php?action=addnewcontact";
             var mode = "new";
-            
+
             reactClickEvent("contact", "modif_cont_add");
             React.render(
                 <AddContactPanelContent
@@ -12,7 +12,7 @@ var ContactTitle = React.createClass({
                     onRefresh={this.refreshParentView}/>,
                 document.getElementById('modifyPanel-content')
             );
-            
+
             return false;
         }.bind(this));
     },
@@ -23,11 +23,13 @@ var ContactTitle = React.createClass({
     render: function(){
         return(
             <div className="title">
-                <div className="overlay">
-                    <a id="modif_cont_add" href="calljson.php">
-                        <span className="fa fa-plus-square fa-2x"></span>
-                    </a>
-                </div>
+                {allowModif() ?
+                    <div className="overlay">
+                        <a id="modif_cont_add" href="calljson.php">
+                            <span className="fa fa-plus-square fa-2x"></span>
+                        </a>
+                    </div> : ''
+                }
                 <h2>// {this.props.title}</h2>
             </div>
         );
@@ -73,16 +75,19 @@ var ContactItem = React.createClass({
 		);
 	},
     render: function(){
+        //var overlay = allowModif() ? <OverlayOnItemContact /> : '';
         return(
             <div className="contact-item">
-                <div className="overlay">
-                    <a id="modif_cont_remove" onClick={this.removeHandler.bind(this, this.props.index)}>
-                        <span className="fa fa-eye-slash fa-2x"></span>
-                    </a>
-                    <a id="modif_cont_change" onClick={this.updateHandler.bind(this, this.props.index)}>
-                        <span className="fa fa-pencil fa-2x m-r-5px"></span>
-                    </a>
-                </div>
+                {allowModif() ?
+                    <div className="overlay">
+                        <a id="modif_cont_remove" onClick={this.removeHandler.bind(this, this.props.index)}>
+                            <span className="fa fa-eye-slash fa-2x"></span>
+                        </a>
+                        <a id="modif_cont_change" onClick={this.updateHandler.bind(this, this.props.index)}>
+                            <span className="fa fa-pencil fa-2x m-r-5px"></span>
+                        </a>
+                    </div> : ''
+                }
                 <div className="item-icon">
                     <span className={this.props.icon}></span>
                 </div>
@@ -118,7 +123,7 @@ var ContactList = React.createClass({
 });
 
 var ContactBox = React.createClass({
-    
+
     loadDataFromServer: function(){
         $.ajax({
             url: this.props.url,
@@ -131,17 +136,17 @@ var ContactBox = React.createClass({
             }.bind(this)
         });
     },
-    
+
     componentDidMount: function(){
         this.loadDataFromServer();
     },
-    
+
     getInitialState: function(){
         return {
             data:[]
         }
     },
-    
+
     updateHandler: function(data){
         this.setState({data:data});
     },
@@ -171,7 +176,7 @@ var AddContactPanelContent = React.createClass({
 			var info = $('#f-add-contact .continfo').val();
 			var description = $('#f-add-contact .contdesc').val();
 			var icon = $('#f-add-contact .conticon').val();
-			
+
 			//Initial values tranfered
 			var data = {};
 			if (mode == 'new') {
@@ -179,7 +184,7 @@ var AddContactPanelContent = React.createClass({
 			} else {
 				data = {info:info, description:description, icon:icon, dir:'data', file:'contact.json', index:updateIndex};
 			}
-			
+
 			$.ajax({
 				url: url,
 				type: "post",
@@ -193,7 +198,7 @@ var AddContactPanelContent = React.createClass({
 					console.error(url, status, err.toString());
 				}.bind(this)
 			});
-            
+
             return false;
 		}.bind(this));
 	},
@@ -215,7 +220,7 @@ var AddContactPanelContent = React.createClass({
 
 						<p>Icon(bootstrap):</p>
 						<input className="conticon m-b-10px" type="text" placeholder="Ex: fa fa-skype fa-fw" defaultValue={this.props.icon}/><p></p>
-						
+
 						<button className="btn btn-success">Update</button>
 					</form>
 				</div>
@@ -228,7 +233,7 @@ var AddContactPanelContent = React.createClass({
  **/
 var actionRemove = getSiteUrl() + "controller/SiteController.php?action=removecontact";
 var actionUpdate = getSiteUrl() + "controller/SiteController.php?action=updatecontact";
-React.render(    
+React.render(
     <ContactBox url="data/contact.json"
                 actionRemove={actionRemove}
                 actionUpdate={actionUpdate}

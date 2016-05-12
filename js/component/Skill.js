@@ -3,7 +3,7 @@ var SkillTitle = React.createClass({
 		jQuery("#modif_skills").bind("click", function(e){
 			e.preventDefault();
 			reactClickEvent("skills", "modif_skills");
-			
+
 			actionRemove = getSiteUrl() + "controller/SiteController.php?action=removeskill"
 			actionMove = getSiteUrl() + "controller/SiteController.php?action=moveitemskill"
 			actionAddNew = getSiteUrl() + "controller/SiteController.php?action=addnewskill"
@@ -25,11 +25,14 @@ var SkillTitle = React.createClass({
 	render: function(){
 		return(
 			<div className="title">
-                <div className="overlay">
-                    <a id="modif_skills" href="calljson.php">
-                        <span className="fa fa-pencil fa-2x"></span>
-                    </a>
-                </div>
+				{
+					allowModif() ?
+					<div className="overlay">
+	                    <a id="modif_skills" href="calljson.php">
+	                        <span className="fa fa-pencil fa-2x"></span>
+	                    </a>
+	                </div> : ''
+				}
                 <h2>// {this.props.title}</h2>
             </div>
 		);
@@ -74,7 +77,7 @@ var SkillList = React.createClass({
 });
 
 var SkillBox = React.createClass({
-	
+
 	loadDataFromServer: function(){
 		$.ajax({
 			url: this.props.url,
@@ -87,19 +90,19 @@ var SkillBox = React.createClass({
 			}.bind(this)
 		});
 	},
-	
+
 	getInitialState: function(){
 		return{
 			data:[],
 		}
 	},
-	
+
 	componentDidMount: function(){
 		this.loadDataFromServer();
 	},
-	
+
 	componentWillMount: function(){},
-	
+
 	//Run js after painting element
 	componentDidUpdate: function(){
 		$('.item-skills').each(function(){
@@ -110,11 +113,11 @@ var SkillBox = React.createClass({
 			}, 1000);
 		});
 	},
-	
+
 	refreshBlockView: function(data){
 		this.setState({data:data});
 	},
-    
+
 	render: function(){
         return(
 			<div>
@@ -130,7 +133,7 @@ var SkillBox = React.createClass({
 /*Add/Modify panel content
  **/
 ItemSkillPanel = React.createClass({
-	
+
 	removeHandler: function(index){
 		//Cannot remove child by the code below with javascript traditionnal because the li element keeps it index when rendering
 		//and it will not be updated with javascript function! Omg!
@@ -151,7 +154,7 @@ ItemSkillPanel = React.createClass({
 			}.bind(this)
 		});
 	},
-	
+
 	itemUp: function(index){
 		$.ajax({
 			url:this.props.actionMove,
@@ -167,12 +170,12 @@ ItemSkillPanel = React.createClass({
 			}.bind(this)
 		});
 	},
-	
+
 	onChangeHandler: function(){
 		//Todo
 		return false;
 	},
-	
+
 	itemDown: function(index){
 		$.ajax({
 			url:this.props.actionMove,
@@ -188,11 +191,11 @@ ItemSkillPanel = React.createClass({
 			}.bind(this)
 		});
 	},
-	
+
 	refreshView: function(data){
 		this.props.onRefresh(data);
 	},
-	
+
 	render: function(){
 		return(
 			<li className="first">
@@ -221,7 +224,7 @@ ItemSkillListPanel = React.createClass({
 								onRefresh={this.refreshView}/>
 			);
 		}, this);
-		
+
 		return(
 			<ul id="skill_lists">
 				{itemList}
@@ -233,11 +236,11 @@ ItemSkillListPanel = React.createClass({
 AddSkillPanelContent = React.createClass({
 	refreshView: function(data){
 		this.setState({data:data});
-		
+
 		//Refresh parent view (Block Skills)
 		this.props.onRefresh(data);
 	},
-	
+
 	loadDataFromServer: function(){
 		$.ajax({
 			url: this.props.url,
@@ -250,15 +253,15 @@ AddSkillPanelContent = React.createClass({
 			}.bind(this)
 		});
 	},
-	
+
 	componentDidMount: function(){
 		//Load data at first time
 		this.loadDataFromServer();
-		
+
 		//Submit data content
 		jQuery('#f-add-skill .btn-success').bind('click', function(e){
 			e.preventDefault();
-			
+
 			//Get all element in list
 			var skills = [];
 			$('#skill_lists').each(function(){
@@ -270,7 +273,7 @@ AddSkillPanelContent = React.createClass({
 					}
 				});
 			});
-			
+
 			var url = this.props.actionSaveAll;
 			$.ajax({
 				url:url,
@@ -289,13 +292,13 @@ AddSkillPanelContent = React.createClass({
 			});
 		}.bind(this));
 	},
-	
+
 	getInitialState: function(){
 		return{
 			data:[],
 		};
 	},
-	
+
 	addNewItem: function(){
 		var name = $('#f-add-skill .left').val();
 		var percent = $('#f-add-skill .right').val();
@@ -315,23 +318,23 @@ AddSkillPanelContent = React.createClass({
 			}.bind(this)
 		});
 	},
-	
+
 	render: function(){
 		return (
 			<div class="col-xs-12">
 				<div id="f-add-skill">
 					<p>Add/Modify your skills:</p>
-					
+
 					<div className="title">
 						<div className="first">Skill</div>
 						<div>Level</div>
 					</div>
-					
+
 					<ItemSkillListPanel data={this.state.data}
 										actionRemove={this.props.actionRemove}
 										actionMove={this.props.actionMove}
 										onRefresh={this.refreshView}/>
-					
+
 					<div className="title">
 						<input className="left" placeholder="Skill"/>
 						<input className="right" placeholder="0" />

@@ -23,13 +23,13 @@ jQuery("a.modifyAction").bind("click", function(e) {
 
 	// add & show overlay layer
 	jQuery("body").append('<div id="whiteOverlay" onClick="closeProduct()"></div>');
-	
-	// scroll to object specified 
+
+	// scroll to object specified
 	jQuery.scrollTo("#education", 1500);
-	
+
 	// add modification panel
 	jQuery("#education").append('<div id="modifyPanel"><button id="closeButton"  onClick="closeProduct()"></button><div id="modifyPanel-content"></div></div>');
-	
+
 	// get & fill panel detail
 	jQuery("#modifyPanel-content").empty().load(href, function(){
 		if (document.location.protocol === 'file:') {
@@ -49,16 +49,16 @@ function clickEvent(parent, child){
 
 	// add & show overlay layer
 	jQuery("body").append('<div id="whiteOverlay" onClick="closeProduct()"></div>');
-	
-	// scroll to object specified 
+
+	// scroll to object specified
 	jQuery.scrollTo(parent, 1500);
-		
+
 	// remove element
 	jQuery("#modifyPanel").remove();
-	
+
 	// add modification panel
 	jQuery('#'+parent).append('<div id="modifyPanel"><button id="closeButton"  onClick="closeProduct()"></button><div id="modifyPanel-content"></div></div>');
-	
+
 	// get & fill panel detail
 	jQuery("#modifyPanel-content").empty().load(href, function(){
 		if (document.location.protocol === 'file:') {
@@ -74,20 +74,20 @@ function clickEvent(parent, child){
 function reactClickEvent(parent, child){
 	//Get object by id
 	var obj = document.getElementById(child);
-	var href = jQuery(obj).attr("href");
+	//var href = jQuery(obj).attr("href");
 
 	// add & show overlay layer
 	jQuery("body").append('<div id="whiteOverlay" onClick="closeProduct()"></div>');
-	
-	// scroll to object specified 
+
+	// scroll to object specified
 	jQuery.scrollTo(parent, 1500);
-		
+
 	// remove element
 	jQuery("#modifyPanel").remove();
-	
+
 	// add modification panel
 	jQuery('#'+parent).append('<div id="modifyPanel"><button id="closeButton"  onClick="closeProduct()"></button><div id="modifyPanel-content"></div></div>');
-	
+
 	// get & fill panel detail
 	jQuery("#modifyPanel").fadeIn(300);
 }
@@ -97,75 +97,20 @@ function closeProduct(args) {
 	jQuery("#whiteOverlay").remove();
 }
 
-/*Modify home button event*/
-//About me
-//jQuery("#modif_aboutme").bind("click", function(e){
-//	e.preventDefault();
-//	clickEvent("aboutme", "modif_aboutme");
-//});
-//
-////Education
-//jQuery("#modif_edu_add").bind("click", function(e){
-//	e.preventDefault();
-//	clickEvent("education", "modif_edu_add");
-//});
-//
-//jQuery("#modif_edu_remove").bind("click", function(e){
-//	e.preventDefault();
-//	console.log("modif_edu_remove");
-//});
-//
-//jQuery("#modif_edu_change").bind("click", function(e){
-//	e.preventDefault();
-//	console.log("modif_edu_change");
-//});
-//
-////Experience
-//jQuery("#modif_exp_add").bind("click", function(e){
-//	e.preventDefault();
-//	clickEvent("experiences", "modif_exp_add");
-//});
-//
-//jQuery("#modif_exp_remove").bind("click", function(e){
-//	e.preventDefault();
-//	console.log("modif_exp_remove");
-//});
-//
-//jQuery("#modif_exp_change").bind("click", function(e){
-//	e.preventDefault();
-//	console.log("modif_exp_change");
-//});
-//
-////Contact
-//jQuery("#modif_cont_add").bind("click", function(e){
-//	e.preventDefault();
-//	clickEvent("contact", "modif_cont_add");
-//});
-//
-//jQuery("#modif_cont_remove").bind("click", function(e){
-//	e.preventDefault();
-//	console.log("modif_cont_remove");
-//});
-//
-//jQuery("#modif_cont_change").bind("click", function(e){
-//	e.preventDefault();
-//	console.log("modif_cont_change");
-//});
-//
-////Skills
-//jQuery("#modif_skills").bind("click", function(e){
-//	e.preventDefault();
-//	clickEvent("skills", "modif_skills");
-//});
-//
-////Languages
-//jQuery("#modif_lang").bind("click", function(e){
-//	e.preventDefault();
-//	clickEvent("languages", "modif_lang");
-//});
-//
-////Hobbies
-//jQuery("#modif_hob").bind("click", function(e){
-//	e.preventDefault();
-//	clickEvent("hobbies", "modif_hob");
-//});
+function getURLParameter(sParam){
+    var sPageURL = window.location.search.substring(1);
+    var sURLVariables = sPageURL.split('&');
+    for (var i = 0; i < sURLVariables.length; i++)
+    {
+        var sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] == sParam)
+        {
+            return sParameterName[1];
+        }
+    }
+}
+
+function allowModif(){
+	var token = getURLParameter('token');
+	return (token != undefined && token == 'allomodif9999') ? true : false;
+}

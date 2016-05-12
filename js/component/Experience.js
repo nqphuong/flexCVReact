@@ -4,7 +4,7 @@ var ExperienceTitle = React.createClass({
 			e.preventDefault();
 			var action = getSiteUrl() + "controller/SiteController.php?action=addnewexperience";
 			var mode = "new";
-			
+
 			reactClickEvent("experiences", "modif_exp_add");
 			React.render(
 				<AddExperienceContent
@@ -12,7 +12,7 @@ var ExperienceTitle = React.createClass({
 					onRefresh={this.refreshParentView}/>,
 				document.getElementById('modifyPanel-content')
 			);
-			
+
 			return false;
 		}.bind(this));
 	},
@@ -23,11 +23,15 @@ var ExperienceTitle = React.createClass({
 	render: function(){
 		return (
 			<div className="title">
-                <div className="overlay">
-                    <a id="modif_exp_add" href="html/calljson.php">
-                        <span className="fa fa-plus-square fa-2x"></span>
-                    </a>
-                </div>
+				{
+					allowModif() ?
+					<div className="overlay">
+						<a id="modif_exp_add" href="html/calljson.php">
+							<span className="fa fa-plus-square fa-2x"></span>
+						</a>
+					</div> : ''
+				}
+
                 <h2>// {this.props.title}</h2>
             </div>
 		);
@@ -76,14 +80,17 @@ var ExperienceItem = React.createClass({
 	render: function(){
 		return (
 			<div className="job clearfix">
-                <div className="overlay">
-                    <a id="modif_exp_remove" onClick={this.removeHandler.bind(this, this.props.index)}>
-                        <span className="fa fa-eye-slash fa-2x"></span>
-                    </a>
-                    <a id="modif_exp_change" onClick={this.updateHandler.bind(this, this.props.index)}>
-                        <span className="fa fa-pencil fa-2x m-r-5px"></span>
-                    </a>
-                </div>
+				{
+					allowModif() ?
+	                <div className="overlay">
+	                    <a id="modif_exp_remove" onClick={this.removeHandler.bind(this, this.props.index)}>
+	                        <span className="fa fa-eye-slash fa-2x"></span>
+	                    </a>
+	                    <a id="modif_exp_change" onClick={this.updateHandler.bind(this, this.props.index)}>
+	                        <span className="fa fa-pencil fa-2x m-r-5px"></span>
+	                    </a>
+	                </div> : ''
+				}
                 <div className="col-xs-3">
                     <div className="company">{this.props.company}</div>
                     <div className="year">{this.props.year}</div>
@@ -114,7 +121,7 @@ var ExperienceList = React.createClass({
 								onUpdate={this.updateHandler}/>
 			);
 		}, this);
-		
+
 		return(
 			<div>
 				{experienceList}
@@ -124,7 +131,7 @@ var ExperienceList = React.createClass({
 });
 
 var ExperienceBox = React.createClass({
-	
+
 	loadDataFromServer: function(){
 		$.ajax({
 			url: this.props.url,
@@ -137,17 +144,17 @@ var ExperienceBox = React.createClass({
 			}.bind(this),
 		});
 	},
-	
+
 	componentDidMount: function(){
 		this.loadDataFromServer();
 	},
-	
+
 	getInitialState: function(){
 		return {
 			data:[],
 		};
 	},
-	
+
 	updateHandler: function(data){
 		this.setState({data:data});
 	},
@@ -179,7 +186,7 @@ var AddExperienceContent = React.createClass({
 			var title = $('#f-add-experience .extitle').val();
 			var description = $('#f-add-experience .exdesc').val();
 			var year = $('#f-add-experience .exyear').val();
-			
+
 			//Initial values tranfered
 			var data = {};
 			if (mode == 'new') {
@@ -187,7 +194,7 @@ var AddExperienceContent = React.createClass({
 			} else {
 				data = {company:company, title:title, description:description, year:year, dir:'data', file:'experience.json', index:updateIndex};
 			}
-			
+
 			$.ajax({
 				url: url,
 				type: "post",
@@ -201,7 +208,7 @@ var AddExperienceContent = React.createClass({
 					console.error(url, status, err.toString());
 				}.bind(this)
 			});
-			
+
 			return false;
 		}.bind(this));
 	},
@@ -217,16 +224,16 @@ var AddExperienceContent = React.createClass({
 						<p>Add/Modify your experience:</p>
 						<p>Company:</p>
 						<input className="excompany" type="Text" placeholder="Text" defaultValue={this.props.company}></input><p></p>
-						
+
 						<p>Title:</p>
 						<input className="extitle" type="text" placeholder="Text" defaultValue={this.props.title}/><p></p>
-						
+
 						<p>Description:</p>
 						<textarea className="exdesc" placeholder="Text" defaultValue={this.props.description}></textarea><p></p>
 
 						<p>Year:</p>
 						<input className="exyear m-b-10px" type="text" placeholder="YYYY" defaultValue={this.props.year}/><p></p>
-						
+
 						<button className="btn btn-success">Update</button>
 					</form>
 				</div>
@@ -238,7 +245,7 @@ var AddExperienceContent = React.createClass({
 //Main
 var actionRemove = getSiteUrl() + "controller/SiteController.php?action=removeexperience";
 var actionUpdate = getSiteUrl() + "controller/SiteController.php?action=updateexperience";
-React.render(	
+React.render(
     <ExperienceBox url="data/experience.json"
 					actionRemove={actionRemove}
 					actionUpdate={actionUpdate}

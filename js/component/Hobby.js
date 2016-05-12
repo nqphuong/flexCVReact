@@ -3,7 +3,7 @@ var HobbyTitle = React.createClass({
 		jQuery("#modif_hob").bind("click", function(e){
 			e.preventDefault();
 			reactClickEvent("hobbies", "modif_hob");
-			
+
 			actionRemove = getSiteUrl() + "controller/SiteController.php?action=removehobby"
 			actionMove = getSiteUrl() + "controller/SiteController.php?action=moveitemhobby"
 			actionAddNew = getSiteUrl() + "controller/SiteController.php?action=addnewhobby"
@@ -24,11 +24,15 @@ var HobbyTitle = React.createClass({
 	render: function(){
 		return (
 			<div className="title">
-                <div className="overlay">
-                    <a id="modif_hob" href="html/calljson.php">
-                        <span className="fa fa-pencil fa-2x"></span>
-                    </a>
-                </div>
+				{
+					allowModif() ?
+					<div className="overlay">
+	                    <a id="modif_hob" href="html/calljson.php">
+	                        <span className="fa fa-pencil fa-2x"></span>
+	                    </a>
+	                </div> : ''
+				}
+
                 <h2>// {this.props.title}</h2>
             </div>
 		);
@@ -71,21 +75,21 @@ var Hobby = React.createClass({
 			}.bind(this)
 		});
 	},
-	
+
 	componentDidMount: function(){
 		this.loadDataFromServer();
 	},
-	
+
 	getInitialState: function(){
 		return {
 			data:[],
 		}
 	},
-	
+
 	refreshBlockView: function(data){
 		this.setState({data:data});
 	},
-	
+
     render: function(){
         return (
 			<div>
@@ -100,7 +104,7 @@ var Hobby = React.createClass({
 /*Add/Modify panel content
  **/
 var ItemHobbyPanel = React.createClass({
-	
+
 	removeHandler: function(index){
 		//Cannot remove child by the code below with javascript traditionnal because the li element keeps it index when rendering
 		//and it will not be updated with javascript function! Omg!
@@ -120,7 +124,7 @@ var ItemHobbyPanel = React.createClass({
 			}.bind(this)
 		});
 	},
-	
+
 	itemUp: function(index){
 		$.ajax({
 			url:this.props.actionMove,
@@ -136,7 +140,7 @@ var ItemHobbyPanel = React.createClass({
 			}.bind(this)
 		});
 	},
-	
+
 	itemDown: function(index){
 		$.ajax({
 			url:this.props.actionMove,
@@ -152,11 +156,11 @@ var ItemHobbyPanel = React.createClass({
 			}.bind(this)
 		});
 	},
-	
+
 	refreshView: function(data){
 		this.props.onRefresh(data);
 	},
-	
+
 	render: function(){
 		return(
 			<li className="first">
@@ -183,7 +187,7 @@ var ItemHobbyListPanel = React.createClass({
 								onRefresh={this.refreshView}/>
 			);
 		}, this);
-		
+
 		return(
 			<ul id="hobby_lists">
 				{itemList}
@@ -195,11 +199,11 @@ var ItemHobbyListPanel = React.createClass({
 var AddHobbyPanelContent = React.createClass({
 	refreshView: function(data){
 		this.setState({data:data});
-		
+
 		//Refresh parent view (Block Hobbies)
 		this.props.onRefresh(data);
 	},
-	
+
 	loadDataFromServer: function(){
 		$.ajax({
 			url: this.props.url,
@@ -212,18 +216,18 @@ var AddHobbyPanelContent = React.createClass({
 			}.bind(this)
 		});
 	},
-	
+
 	componentDidMount: function(){
 		//Load data at first time
 		this.loadDataFromServer();
 	},
-	
+
 	getInitialState: function(){
 		return{
 			data:[],
 		};
 	},
-	
+
 	addNewItem: function(){
 		var name = $('#f-add-hobby .left').val();
 		$.ajax({
@@ -237,30 +241,30 @@ var AddHobbyPanelContent = React.createClass({
 				} else {
 					alert('nothing to do!');
 				}
-				
+
 			}.bind(this),
 			error: function(xhr, status, err){
 				console.error('Err: Add new item hobby', status, err.toString());
 			}.bind(this)
 		});
 	},
-	
+
 	render: function(){
 		return (
 			<div class="col-xs-12">
 				<div id="f-add-hobby">
 					<p>Add/Modify your hobbies:</p>
-					
+
 					<div className="title">
 						<div className="first">Hobbies</div>
 						<div>Level</div>
 					</div>
-					
+
 					<ItemHobbyListPanel data={this.state.data}
 										actionRemove={this.props.actionRemove}
 										actionMove={this.props.actionMove}
 										onRefresh={this.refreshView}/>
-					
+
 					<div className="title">
 						<input className="left" placeholder="Hobby"/>
 						<a onClick={this.addNewItem}><span className="fa fa-plus fa-2x"></span></a>
@@ -277,4 +281,3 @@ var AddHobbyPanelContent = React.createClass({
 React.render(
     <Hobby url="data/hobby.json"/>, document.getElementById('hobbies')
 );
-
