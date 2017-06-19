@@ -1,7 +1,7 @@
 /*******************************************
 FONTS
 *******************************************/
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800);
 /*******************************************
 SETTINGS
 *******************************************/
@@ -53,7 +53,7 @@ CONTAINER
 }
 
 .text-header{
-  
+
 }
 
 .text-header h1{
@@ -166,7 +166,7 @@ CONTAINER
   height: 0;
   width: 0;
   border: solid transparent;
-  border-right-color: #eee;
+  border-right-color: #f5f5f5;
   border-width: 8px;
   pointer-events: none;
 }
@@ -191,10 +191,10 @@ CONTAINER
 .education .description{
   width: 90%;
   float: right !important;
-  background: #eee;
+  background: #f5f5f5;
   padding: 10px 10px 0 10px;
   margin-bottom: 10px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #e5e5e5;
   position: relative;
   display: inline-block;
 }
@@ -222,7 +222,7 @@ CONTAINER
 
 .job .year{
   font-size: 1.3em;
-  
+
 }
 
 .job .title{
@@ -309,7 +309,7 @@ CONTAINER
 }
 
 .language-skills{
-  
+
 }
 
 .language-skills .skill{
@@ -410,7 +410,7 @@ CONTAINER
 }
 
 #f-about-me{
-  
+
 }
 
 #f-about-me p,
@@ -442,7 +442,7 @@ CONTAINER
 }
 
 #f-add-skill{
-  
+
 }
 
 #f-add-skill ul,
@@ -553,4 +553,10 @@ CONTAINER
 #f-add-language .first,
 #f-add-hobby .first{
   clear: both;
+}
+
+@media (max-width: 991px){
+    .education .year{
+        width: auto;
+    }
 }

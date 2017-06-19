@@ -112,5 +112,5 @@ function getURLParameter(sParam){
 
 function allowModif(){
 	var token = getURLParameter('token');
-	return (token != undefined && token == 'allomodif9999') ? true : false;
+	return (token != undefined && token == '6rghPNPs') ? true : false;
 }
